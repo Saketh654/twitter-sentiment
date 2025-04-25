@@ -31,6 +31,10 @@ preprocess_tweets <- function(input_file, output_file, sample_size = 50000, rand
     cat("Sample size greater than or equal to total data points. Using all data.\n")
   }
   
+  cat("Formatting DateTime column...\n")
+  tweets_df$DateTime<- str_remove(tweets_df$DateTime, " [A-Z]{3} ")
+  tweets_df$Formatted_Date <- format(strptime(tweets_df$DateTime, format = "%a %b %d %H:%M:%S %Y"), "%d--%m--%Y")
+  print(head(tweets_df))
   # Clean tweets
   cat("Cleaning tweets...\n")
   
